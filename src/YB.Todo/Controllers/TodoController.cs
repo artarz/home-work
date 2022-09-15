@@ -44,7 +44,7 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost("Update")]
-    public async Task<IActionResult> Add([FromBody] UpdateModel model)
+    public async Task<IActionResult> Update([FromBody] UpdateModel model)
     {
         ResponseResult result = await _service.UpdateAsync(model);
 
@@ -55,7 +55,7 @@ public class TodoController : ControllerBase
 
     }
     
-    [HttpGet("Delete{Id}")]
+    [HttpGet("Delete/{Id}")]
     public async Task<IActionResult> Delete(int Id)
     {
         ResponseResult result = await _service.DeleteAsync(Id);
@@ -67,7 +67,7 @@ public class TodoController : ControllerBase
 
     }
 
-    [HttpGet("SetCompleted{Id}")]
+    [HttpGet("SetCompleted/{Id}")]
     public async Task<IActionResult> SetCompleted(int Id)
     {
         ResponseResult result = await _service.SetCompletedAsync(Id);
@@ -79,8 +79,8 @@ public class TodoController : ControllerBase
 
     }   
     
-    [HttpGet("Find{Keywoard}")]
-    public async Task<IActionResult> Find(string keywoard)
+    [HttpGet("Find/{Keywoard}")]
+    public async Task<IActionResult> Find(string? keywoard)
     {
         ResponseResult result = await _service.FindAsync(keywoard);
 

@@ -75,6 +75,13 @@ namespace YB.Service.ToDoService
         {
             ResponseResult response = new() { HasError = false };
             var entity = await _toDoRepo.QueryAll().AsNoTracking().FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            if (entity is null)
+            {
+                response.Message = "Unable to find an item";
+                return response;
+            }
+
             try
             {
                 entity.Description = model.Description;
