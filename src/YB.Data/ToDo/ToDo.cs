@@ -9,6 +9,6 @@ namespace YB.Data.ToDo
         public string Description { get; set; } = null!;
         public bool IsComplete { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string? ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

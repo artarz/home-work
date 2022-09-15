@@ -42,4 +42,40 @@ public class TodoController : ControllerBase
         return Ok(result);
 
     }
+
+    [HttpPost("Update")]
+    public async Task<IActionResult> Add(UpdateModel model)
+    {
+        ResponseResult result = await _service.UpdateAsync(model);
+
+        if (result.HasError)
+            return BadRequest(result);
+
+        return Ok(result);
+
+    }
+    
+    [HttpGet("Delete{Id}")]
+    public async Task<IActionResult> Delete(int Id)
+    {
+        ResponseResult result = await _service.DeleteAsync(Id);
+
+        if (result.HasError)
+            return BadRequest(result);
+
+        return Ok(result);
+
+    }
+
+    [HttpGet("SetCompleted{Id}")]
+    public async Task<IActionResult> SetCompleted(int Id)
+    {
+        ResponseResult result = await _service.SetCompletedAsync(Id);
+
+        if (result.HasError)
+            return BadRequest(result);
+
+        return Ok(result);
+
+    }
 }

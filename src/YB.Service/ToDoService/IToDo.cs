@@ -12,5 +12,8 @@ namespace YB.Service.ToDoService
     {
         Task<ResponseResult> GetAllAsync();
         Task<ResponseResult> InsertAsync(AddModel model);
+        Task<ResponseResult> UpdateAsync(UpdateModel model);
+        Task<ResponseResult> DeleteAsync(int Id);
+        Task<ResponseResult> SetCompletedAsync(int id);
     }
 }

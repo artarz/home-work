@@ -43,9 +43,7 @@ namespace YB.Data.ToDo
 
                 entity.Property(e => e.Description).HasMaxLength(200);
 
-                entity.Property(e => e.ModifiedDate)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Server=192.168.40.4;Database=ToDoDB;Trusted_Connection=False;User ID=sa;Password=Aaaa1111" Microsoft.EntityFrameworkCore.SqlServer -UseDatabaseNames -OutputDir ToDo -force -project YB.Data

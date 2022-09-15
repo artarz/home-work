@@ -17,6 +17,8 @@ namespace YB.Service.ToDoService
         {
             _toDoRepo = toDo;
         }
+
+
         public async Task<ResponseResult> GetAllAsync()
         {
             ResponseResult response = new()
@@ -83,6 +85,46 @@ namespace YB.Service.ToDoService
                 _toDoRepo.Update(entity);
                 await _toDoRepo.SaveAsync();
 
+                response.Data = entity.Id;
+
+            }
+            catch (Exception ex)
+            {
+                response.HasError = true;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
+
+        public async  Task<ResponseResult> DeleteAsync(int Id)
+        {
+
+            ResponseResult response = new() { HasError = false };
+            try
+            {
+                _toDoRepo.Delete(Id);
+                await _toDoRepo.SaveAsync();
+
+            }
+            catch (Exception ex)
+            {
+                response.HasError = true;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
+
+        public async  Task<ResponseResult> SetCompletedAsync(int Id)
+        {
+            ResponseResult response = new() { HasError = false };
+            var entity = await _toDoRepo.QueryAll().AsNoTracking().FirstOrDefaultAsync(x => x.Id == Id);
+            try
+            {
+
+                entity.IsComplete = true;
+                entity.ModifiedDate = DateTime.Now;
+                _toDoRepo.Update(entity);
+                await _toDoRepo.SaveAsync();
                 response.Data = entity.Id;
 
             }
