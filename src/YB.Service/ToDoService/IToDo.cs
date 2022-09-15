@@ -15,5 +15,6 @@ namespace YB.Service.ToDoService
         Task<ResponseResult> UpdateAsync(UpdateModel model);
         Task<ResponseResult> DeleteAsync(int Id);
         Task<ResponseResult> SetCompletedAsync(int id);
+        Task<ResponseResult> FindAsync(string keywoard);
     }
 }

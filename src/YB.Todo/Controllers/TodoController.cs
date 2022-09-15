@@ -32,7 +32,7 @@ public class TodoController : ControllerBase
 
 
     [HttpPost("Add")]
-    public async Task<IActionResult> Add(AddModel model)
+    public async Task<IActionResult> Add([FromBody] AddModel model)
     {
         ResponseResult result = await _service.InsertAsync(model);
 
@@ -44,7 +44,7 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost("Update")]
-    public async Task<IActionResult> Add(UpdateModel model)
+    public async Task<IActionResult> Add([FromBody] UpdateModel model)
     {
         ResponseResult result = await _service.UpdateAsync(model);
 
@@ -71,6 +71,18 @@ public class TodoController : ControllerBase
     public async Task<IActionResult> SetCompleted(int Id)
     {
         ResponseResult result = await _service.SetCompletedAsync(Id);
+
+        if (result.HasError)
+            return BadRequest(result);
+
+        return Ok(result);
+
+    }   
+    
+    [HttpGet("Find{Keywoard}")]
+    public async Task<IActionResult> Find(string keywoard)
+    {
+        ResponseResult result = await _service.FindAsync(keywoard);
 
         if (result.HasError)
             return BadRequest(result);

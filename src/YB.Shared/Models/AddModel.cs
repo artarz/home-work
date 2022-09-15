@@ -12,6 +12,7 @@ namespace YB.Shared.Models
     {
         [JsonPropertyName("Description")]
         [StringLength(200, ErrorMessage = "Invalid Description fromat")]
+        [Required]
         public string? Description { get; set; } 
     }
 }

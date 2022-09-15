@@ -28,6 +28,19 @@ builder.Services.AddDbContext<ToDoDBContext>(x => x.UseSqlServer(connString));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IToDoService, ToDoService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+            //.AllowCredentials();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +50,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseCors(localHostOrigins);
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
