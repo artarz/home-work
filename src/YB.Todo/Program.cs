@@ -1,6 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using YB.Data.Repository.Implementation;
+using YB.Data.Repository.Interface;
+using YB.Data.ToDo;
+using YB.Service.ToDoService;
+
 const string localHostOrigins = "_localHostOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigurationManager config = builder.Configuration;
+var connString = builder.Configuration.GetConnectionString("TodoConnString");
 
 // Add services to the container.
 
@@ -14,6 +22,11 @@ builder.Services.AddCors(opts => opts.AddPolicy(name: localHostOrigins, policy =
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ToDoDBContext>(x => x.UseSqlServer(connString));
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IToDoService, ToDoService>();
 
 var app = builder.Build();
 

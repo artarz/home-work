@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace YB.Shared.Models
 {
-    public  class AddModel
+    public  class UpdateModel
     {
+        [Range(1, Int32.MaxValue)]
+        [JsonPropertyName("Id")]
+        public int Id { get; set; }
+
         [JsonPropertyName("Description")]
-        [StringLength(200, ErrorMessage = "Invalid Description fromat")]
-        public string? Description { get; set; } 
+        public string Description { get; set; }
+
+        [JsonPropertyName("IsCompleted")]
+        public bool IsCompleted { get; set; }
     }
 }

@@ -25,13 +25,13 @@ public class TodoController : ControllerBase
 
         if (result.HasError)
             return BadRequest(result);
-            
-        return Ok(result);
+
+        return Ok(new { Data = result.Data, HasError = false });
 
     }
 
 
-    [HttpGet("Add")]
+    [HttpPost("Add")]
     public async Task<IActionResult> Add(AddModel model)
     {
         ResponseResult result = await _service.InsertAsync(model);

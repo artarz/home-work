@@ -31,17 +31,17 @@ namespace YB.Data.ToDo
         {
             modelBuilder.Entity<ToDo>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("ToDo");
+
+                entity.HasIndex(e => e.CreatedDate, "IX_ToDo");
+
+                entity.HasIndex(e => e.IsComplete, "IX_ToDo_1");
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description).HasMaxLength(200);
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ModifiedDate)
                     .HasMaxLength(10)
