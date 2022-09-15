@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\YB.Data\YB.Data.csproj" />
-    <ProjectReference Include="..\YB.Shared\YB.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

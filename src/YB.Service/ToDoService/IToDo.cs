@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YB.Shared.Models;
 
 namespace YB.Service.ToDoService
 {
-    internal interface IToDo
+    public  interface IToDoService
     {
+        Task<ResponseResult> GetAllAsync();
+        Task<ResponseResult> InsertAsync(AddModel model);
     }
 }
